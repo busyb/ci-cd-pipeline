@@ -1,0 +1,39 @@
+name: Build, Test, Deploy Spring Boot App
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+
+      - name: Build with Maven
+        run: mvn clean install -DskipTests
+
+      - name: Run Tests
+        run: mvn test
+
+      - name: Build Docker Image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: false
+          tags: oewumi/ci-cd-pipeline:latest
+
+      # Optional: Push image to Docker Hub after manual login step later
+
+      - name: (Optional) Push Docker Image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: |
+            oewumi/ci-cd-pipeline:latest
