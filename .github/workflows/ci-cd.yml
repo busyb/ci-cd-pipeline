@@ -42,8 +42,9 @@ jobs:
           tags: oewumi/ci-cd-pipeline:${{ github.sha }}
 
       - name: Trigger Render deployment
-        uses: actions/http-client@v1
+        uses: fjogeleit/http-request-action@v1
         with:
           url: ${{ secrets.RENDER_DEPLOY_HOOK }}
           method: POST
+
 
