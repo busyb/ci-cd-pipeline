@@ -47,12 +47,19 @@ jobs:
             oewumi/ci-cd-pipeline:${{ github.sha }}
           build-args: |
             JAR_FILE=target/ci-cd-pipeline-*.jar
-      
 
       - name: Trigger Render deployment
         uses: fjogeleit/http-request-action@v1
         with:
           url: ${{ secrets.RENDER_DEPLOY_HOOK }}
           method: POST
+
+      - name: Trigger Render deployment image pull
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: ${{ secrets.RENDER_DEPLOY_HOOK_IMAGE }}
+          method: POST
+
+
 
 
