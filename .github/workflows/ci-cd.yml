@@ -42,7 +42,9 @@ jobs:
         with:
           context: .
           push: true
-          tags: oewumi/ci-cd-pipeline:${{ github.sha }}
+          tags: |
+            oewumi/ci-cd-pipeline:latest
+            oewumi/ci-cd-pipeline:${{ github.sha }}
           build-args: |
             JAR_FILE=target/ci-cd-pipeline-*.jar
       
