@@ -41,13 +41,9 @@ jobs:
           push: true
           tags: oewumi/ci-cd-pipeline:${{ github.sha }}
 
-
-#      - name: Login to Docker Hub # Step to log in to Docker Hub
-#        run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}  # Login with secrets
-#
-#      - name: Build Docker image # Step to build the Docker image
-#        run: docker build -t oewumi/ci-cd-pipeline:v1.0 . # Build the Docker image with the specified tag
-#
-#      - name: Push Docker image # Step to push the Docker image to Docker Hub
-#        run: docker push oewumi/ci-cd-pipeline:v1.0 # Push the Docker image with the specified tag
+      - name: Trigger Render deployment
+        uses: actions/http-client@v1
+        with:
+          url: ${{ secrets.RENDER_DEPLOY_HOOK }}
+          method: POST
 
