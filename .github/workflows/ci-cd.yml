@@ -63,6 +63,7 @@ jobs:
       - name: Set up JDK 17 # Step to set up Java Development Kit version 17
         uses: actions/setup-java@v2 # Use the pre-built setup-java action
         with:
+          distribution: 'temurin'  # Required field specifying the JDK distribution
           java-version: '17' # Specify the JDK version
 
       - name: Build with Maven # Step to build the project using Maven
